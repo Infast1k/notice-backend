@@ -1,0 +1,7 @@
+[project]
+name = "notice"
+version = "0.0.1"
+description = "Backend for markdown notes taking application"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
