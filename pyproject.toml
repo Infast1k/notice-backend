@@ -5,3 +5,8 @@ description = "Backend for markdown notes taking application"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.20",
+]
