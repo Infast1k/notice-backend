@@ -26,3 +26,8 @@ class Folder(BaseEntity):
         self._title: Title = title
         self._parent_oid: UUID | None = parent_oid
         super().__init__(oid=oid, created_at=created_at, updated_at=updated_at)
+
+    @property
+    def title(self) -> str:
+        """Получить название папки"""
+        return self._title.value
