@@ -5,8 +5,11 @@ description = "Backend for markdown notes taking application"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "fastapi>=0.139.0",
     "motor>=3.7.1",
     "punq>=0.8.0",
+    "pydantic>=2.13.4",
+    "uvicorn>=0.50.0",
 ]
 
 [dependency-groups]
