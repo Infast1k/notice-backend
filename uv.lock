@@ -74,6 +74,7 @@ version = "0.0.1"
 source = { virtual = "." }
 dependencies = [
     { name = "motor" },
+    { name = "punq" },
 ]
 
 [package.dev-dependencies]
@@ -83,7 +84,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "motor", specifier = ">=3.7.1" }]
+requires-dist = [
+    { name = "motor", specifier = ">=3.7.1" },
+    { name = "punq", specifier = ">=0.8.0" },
+]
 
 [package.metadata.requires-dev]
 dev = [
@@ -114,6 +118,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/8e/22/2de9408ac81acbb8a7d05d4cc064a152ccf33b3d480ebe0cd292153db239/pre_commit-4.6.0.tar.gz", hash = "sha256:718d2208cef53fdc38206e40524a6d4d9576d103eb16f0fec11c875e7716e9d9", size = 198525, upload-time = "2026-04-21T20:31:41.613Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/80/6e/4b28b62ecb6aae56769c34a8ff1d661473ec1e9519e2d5f8b2c150086b26/pre_commit-4.6.0-py2.py3-none-any.whl", hash = "sha256:e2cf246f7299edcabcf15f9b0571fdce06058527f0a06535068a86d38089f29b", size = 226472, upload-time = "2026-04-21T20:31:40.092Z" },
+]
+
+[[package]]
+name = "punq"
+version = "0.8.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/03/31/be5732aaa2b7cf57225ff25bbd88e4b304890a1aa24f675658f026e12a43/punq-0.8.0.tar.gz", hash = "sha256:efc5308e5b027a466449389ea5b1e9fcfd5eb65495bcb766e3f725a9d6db9998", size = 18159, upload-time = "2026-07-03T17:56:58.105Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4f/92/b78a5a31180f5af151ea0b28ee6c0c7964fb79cfea394fbba6f028423c11/punq-0.8.0-py3-none-any.whl", hash = "sha256:1f34dee67f26bd5ea7f4dfeee11b22aa1a19c634421262a07f2b51a9dc8e2c41", size = 19431, upload-time = "2026-07-03T17:56:57.25Z" },
 ]
 
 [[package]]
@@ -249,6 +265,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/10/9b/5f14927848d2fd4aa891fd88d883788c5a7baba561c7874732364045708c/ruff-0.15.20-py3-none-win32.whl", hash = "sha256:ed65ef510e43a137207e0f01cfcf998aeddb1aeeda5c9d35023e910284d7cf21", size = 10857322, upload-time = "2026-06-25T17:20:28.612Z" },
     { url = "https://files.pythonhosted.org/packages/fa/f0/fe47c501f9dea92a26d788ff98bb5d92ed4cb4c88792c5c88af6b697dc8e/ruff-0.15.20-py3-none-win_amd64.whl", hash = "sha256:a525c81c70fb0380344dd1d8745d8cc1c890b7fc94a58d5a07bd8eb9557b8415", size = 11993274, upload-time = "2026-06-25T17:20:31.871Z" },
     { url = "https://files.pythonhosted.org/packages/d7/2b/9555445e1201d92b3195f45cdb153a0b68f24e0a4273f6e3d5ab46e212bb/ruff-0.15.20-py3-none-win_arm64.whl", hash = "sha256:2f5b2a6d614e8700388806a14996c40fab2c47b819ef57d790a34878858ed9ca", size = 11343498, upload-time = "2026-06-25T17:20:35.03Z" },
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.16.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f6/cc/6253133b5bb138fc3306cebfbda2c520f545d36b5be2c7255cc528bb45d6/typing_extensions-4.16.0.tar.gz", hash = "sha256:dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5", size = 113555, upload-time = "2026-07-02T08:40:05.92Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl", hash = "sha256:481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8", size = 45571, upload-time = "2026-07-02T08:40:04.659Z" },
 ]
 
 [[package]]
