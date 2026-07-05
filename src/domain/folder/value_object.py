@@ -10,7 +10,7 @@ from domain.base.value_object import BaseValueObject
 from domain.folder.exception import EmptyFolderTitleException, TooLongFolderTitleException
 
 
-__MAX_TITLE_LENGTH: Final[int] = 220
+_MAX_TITLE_LENGTH: Final[int] = 220
 """Максимальная длина названия папки"""
 
 
@@ -24,5 +24,5 @@ class Title(BaseValueObject[str]):
         if not self.value:
             raise EmptyFolderTitleException
 
-        if len(self.value) > __MAX_TITLE_LENGTH:
-            raise TooLongFolderTitleException(__MAX_TITLE_LENGTH)
+        if len(self.value) > _MAX_TITLE_LENGTH:
+            raise TooLongFolderTitleException(_MAX_TITLE_LENGTH)
