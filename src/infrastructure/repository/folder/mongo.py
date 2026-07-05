@@ -3,6 +3,7 @@
 __author__ = 'infast1k'
 
 from typing import override
+from uuid import UUID
 
 from domain.folder.entity import Folder
 
@@ -12,27 +13,33 @@ from infrastructure.repository.base.mongo import BaseMongoDBRepository
 
 
 class MongoDBFolderRepository(BaseMongoDBRepository, BaseFolderRepository):
-    """Folder repository abstraction"""
+    """Реализация репозитория для работы с папками"""
 
     @override
-    async def folder_already_exists(self, folder: Folder) -> bool:
-        """Check if folder already exists"""
-        return bool(
-            await self._collection.find_one(
-                filter={
-                    'title': folder.title,
-                }
-            )
-        )
+    async def get_folder_by_id(self, folder_id: UUID) -> Folder | None:
+        """Получить папку по её идентификатору"""
+        return await self._collection.find_one(filter={
+            'oid': str(folder_id),
+        })
+
+    @override
+    async def is_unique_folder(self, folder: Folder) -> bool:
+        """Проверить папку на уникальность"""
+        existing_folder = await self._collection.find_one(filter={
+            'title': folder.title,
+            'parent_oid': str(folder.parent_oid) if folder.parent_oid else None,
+        })
+
+        return bool(existing_folder)
 
     @override
     async def create_folder(self, folder: Folder) -> None:
-        """Add new folder to storage"""
+        """Создать новую папку"""
         await self._collection.insert_one(document=self._convert_entity_to_document(folder))
 
     @staticmethod
     def _convert_entity_to_document(folder: Folder) -> dict:
-        """Convert folder entity to dict"""
+        """Преобразовать сущность в документ"""
         return {
             'oid': str(folder.oid),
             'title': folder.title,

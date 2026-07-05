@@ -8,7 +8,7 @@ from typing import override
 from uuid import UUID
 
 from application.base.command import BaseCommand, BaseCommandHandler
-from application.command.folder.exception import FolderAlreadyExistsException
+from application.command.folder.exception import FolderAlreadyExistsException, FolderDoesNotExistsException
 
 from domain.folder.entity import Folder
 from domain.folder.repository import BaseFolderRepository
@@ -38,8 +38,13 @@ class CreateFolderCommandHandler(BaseCommandHandler[CreateFolderCommand, Folder]
         title = Title(command.title)
         folder = Folder(title=title, parent_oid=command.parent_oid)
 
-        is_already_exists = await self._folder_repository.folder_already_exists(folder)
-        if is_already_exists:
+        if command.parent_oid:
+            parent_folder = await self._folder_repository.get_folder_by_id(command.parent_oid)
+            if not parent_folder:
+                raise FolderDoesNotExistsException(folder)
+
+        is_unique_folder = await self._folder_repository.is_unique_folder(folder)
+        if not is_unique_folder:
             raise FolderAlreadyExistsException(folder)
 
         await self._folder_repository.create_folder(folder)

@@ -12,6 +12,19 @@ from domain.folder.entity import Folder
 
 
 @dataclass(frozen=True, eq=False)
+class FolderDoesNotExistsException(ApplicationException):
+    """Исключение, возникающее при отсутвии папки"""
+
+    folder: Folder
+
+    @property
+    @override
+    def message(self) -> str:
+        """Сообщение об ошибке"""
+        return f'Папки с идентификатором {self.folder.oid} не существует'
+
+
+@dataclass(frozen=True, eq=False)
 class FolderAlreadyExistsException(ApplicationException):
     """Исключение, возникающее при попытке создать папку, которая уже существует"""
 

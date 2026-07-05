@@ -4,6 +4,7 @@ __author__ = 'infast1k'
 
 
 from abc import ABC, abstractmethod
+from uuid import UUID
 
 from domain.folder.entity import Folder
 
@@ -12,8 +13,13 @@ class BaseFolderRepository(ABC):
     """Описание репозитория для работы с папками"""
 
     @abstractmethod
-    async def folder_already_exists(self, folder: Folder) -> bool:
-        """Проверить, существует ли уже такая папка"""
+    async def is_unique_folder(self, folder: Folder) -> bool:
+        """Проверить папку на уникальность"""
+        raise NotImplementedError
+
+    @abstractmethod
+    async def get_folder_by_id(self, folder_id: UUID) -> Folder | None:
+        """Получить модель папки по её идентификатору"""
         raise NotImplementedError
 
     @abstractmethod
