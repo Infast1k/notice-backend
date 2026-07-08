@@ -13,6 +13,8 @@ from application.command.folder.create_folder import CreateFolderCommand, Create
 
 from composition.mediator.main_mediator import Mediator
 
+from config.settings import ApplicationSettings
+
 from domain.folder.repository import BaseFolderRepository
 
 from infrastructure.repository.folder.mongo import MongoDBFolderRepository
@@ -22,11 +24,17 @@ from infrastructure.repository.folder.mongo import MongoDBFolderRepository
 def init_container() -> Container:
     """Инициализировать основной контейнера приложения"""
     container = Container()
+    container.register(ApplicationSettings, instance=ApplicationSettings(), scope=Scope.singleton)
 
     def create_mongodb_client() -> AsyncIOMotorClient:
+        print('init_folder_mongodb_repository before')
+        config: ApplicationSettings = container.resolve(ApplicationSettings)
+        print('init_folder_mongodb_repository after')
         return AsyncIOMotorClient(
-            # FIXME: читать значения из модели конфига
-            'mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/?authSource=admin',
+            (
+                f'mongodb://{config.mongo_username}:{config.mongo_password}'
+                f'@{config.mongo_host}:{config.mongo_port}/?authSource=admin'
+            ),
             serverSelectionTimeoutMS=3000,
         )
 
@@ -34,12 +42,13 @@ def init_container() -> Container:
     mongo_db_client = container.resolve(AsyncIOMotorClient)
 
     def init_folder_mongodb_repository() -> BaseFolderRepository:
+        print('init_folder_mongodb_repository before')
+        config: ApplicationSettings = container.resolve(ApplicationSettings)
+        print('init_folder_mongodb_repository after')
         return MongoDBFolderRepository(
             client=mongo_db_client,
-            # FIXME: читать значения из модели конфига
-            db_name='{MONGO_FOLDER_DB_NAME}',
-            # FIXME: читать значения из модели конфига
-            collection_name='{MONGO_FOLDER_COLLECTION}',
+            db_name=config.mongo_folder_db_name,
+            collection_name=config.mongo_folder_collection,
         )
 
     container.register(BaseFolderRepository, factory=init_folder_mongodb_repository, scope=Scope.singleton)
